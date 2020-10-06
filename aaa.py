@@ -10,10 +10,6 @@ License: GPL v3 https://www.gnu.org/licenses/gpl-3.0.en.html
 """
 from collections import deque
 from mpg123 import Mpg123 , Out123
-from imutils.video import VideoStream
-from imutils.video import FPS
-import argparse
-import cv2
 import URBasic
 import math
 import pickle
@@ -44,8 +40,8 @@ hor_rot_max = math.radians(70)   #Area Camera X
 vert_rot_max = math.radians(35)  #Area Camera Y
 vector_rot_max = math.radians(15)  #Area Camear Z
 
-#sdata = bytearray((0xdc,0x03,0x00,0x00,0x00,0x04)) #sysid, read, dumy ,dumy ,dumy ,read cnt,not include CRC,
-#sport = serial.Serial("/dev/ttyUSB0", baudrate = 19200, timeout =3.0)
+sdata = bytearray((0xdc,0x03,0x00,0x00,0x00,0x04)) #sysid, read, dumy ,dumy ,dumy ,read cnt,not include CRC,
+sport = serial.Serial("/dev/ttyUSB0", baudrate = 19200, timeout =3.0)
 face_distance = 400
 
 
@@ -306,8 +302,8 @@ origin = set_lookorigin()
 robot.init_realtime_control()  # starts the realtime control loop on the Universal-Robot Controller
 time.sleep(1) # just a short wait to make sure everything is initialised
 try:
-    #th = Thread(target = distance_check)
-    #th.start()
+    th = Thread(target = distance_check)
+    th.start()
     #Socket Listening 
     print("starting loop")
     HOST = ''
